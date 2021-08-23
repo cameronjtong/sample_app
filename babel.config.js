@@ -44,9 +44,9 @@ module.exports = function(api) {
       [
         '@babel/plugin-proposal-class-properties',
         {
-          loose: true
+          loose: true 
         }
-      ],["@babel/plugin-proposal-private-methods", { "loose": true }],
+      ],
       [
         '@babel/plugin-proposal-object-rest-spread',
         {
