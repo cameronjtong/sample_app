@@ -80,6 +80,32 @@ end
       @user.destroy
     end
   end
+  
+  test "should follow and unfollow a user" do 
+    mike = users(:mike)
+    archer = users(:archer)
+    assert_not mike.following?(archer)
+    mike.follow(archer)
+    assert mike.following?(archer)
+    assert archer.followers.include?(mike)
+    mike.unfollow(archer)
+    assert_not mike.following?(archer)
+  end
+  
+  test "should have the right posts" do 
+    mike = users(:mike)
+    archer = users(:archer)
+    lana = users(:lana)
+    lana.microposts.each do |post_following|
+      assert mike.feed.include?(post_following)
+    end 
+    mike.microposts.each do |post_self|
+      assert mike.feed.include?(post_self)
+    end 
+    archer.microposts.each do |post_unfollowed|
+      assert_not mike.feed.include?(post_unfollowed)
+    end
+  end
 end
 
 
